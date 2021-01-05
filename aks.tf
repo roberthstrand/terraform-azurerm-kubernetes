@@ -22,7 +22,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
 
     oms_agent {
       enabled                    = var.enable_oms_agent
-      log_analytics_workspace_id = var.enable_oms_agent == true ? var.log_analytics_workspace_id : null
+      log_analytics_workspace_id = var.enable_oms_agent ? var.log_analytics_workspace_id : null
     }
   }
 
