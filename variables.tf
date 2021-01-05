@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "tags" {
-  type = map(string)
+  type        = map(string)
   description = "Tags that will be used for the deployment."
 }
 
