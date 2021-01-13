@@ -5,6 +5,7 @@ variable "name" {
 
 variable "tags" {
   type        = map(string)
+  default     = null
   description = "Tags that will be used for the deployment."
 }
 
@@ -116,7 +117,7 @@ variable "role_based_access_control" {
 variable "azure_ad_managed" {
   type        = bool
   description = "Is the Azure Active Directory integration Managed, meaning that Azure will create/manage the Service Principal used for integration?"
-  default     = false
+  default     = true
 }
 variable "admin_groups" {
   type        = list(string)
