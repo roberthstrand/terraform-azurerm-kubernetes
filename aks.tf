@@ -64,10 +64,10 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     #node_taints = var.default_node_pool[0].node_taints
 
     # Various additional settings
-    max_pods           = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
-    os_disk_size_gb    = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
-    os_disk_type       = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
-    type               = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
+    max_pods        = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
+    os_disk_size_gb = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
+    os_disk_type    = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
+    type            = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
   }
 
   # One of either identity or service_principal blocks must be specified.
@@ -107,9 +107,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
 
   # Various additional settings
   enable_node_public_ip = lookup(each.value.additional_settings, "enable_node_public_ip", false)
-  max_pods           = lookup(each.value.additional_settings, "max_pods", null)
-  mode               = lookup(each.value.additional_settings, "mode", null)
-  os_type            = lookup(each.value.additional_settings, "os_type", "Linux")
-  os_disk_size_gb    = lookup(each.value.additional_settings, "os_disk_size_gb", null)
-  os_disk_type       = lookup(each.value.additional_settings, "os_disk_type", null)
+  max_pods              = lookup(each.value.additional_settings, "max_pods", null)
+  mode                  = lookup(each.value.additional_settings, "mode", null)
+  os_type               = lookup(each.value.additional_settings, "os_type", "Linux")
+  os_disk_size_gb       = lookup(each.value.additional_settings, "os_disk_size_gb", null)
+  os_disk_type          = lookup(each.value.additional_settings, "os_disk_type", null)
 }
