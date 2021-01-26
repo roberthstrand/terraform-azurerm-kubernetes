@@ -11,6 +11,7 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
 provider "kubernetes" {
   host = module.kubernetes.host
 
@@ -18,6 +19,7 @@ provider "kubernetes" {
   client_key             = base64decode(module.kubernetes.client_key)
   cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
 }
+
 resource "azurerm_resource_group" "cluster" {
   name     = "cluster-rg"
   location = "West Europe"
