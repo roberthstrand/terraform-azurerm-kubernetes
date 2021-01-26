@@ -34,12 +34,10 @@ A static version can be set, as long as it's above the minimum version specified
 
 ```hcl
 provider "kubernetes" {
-  load_config_file = "false"
-
   host = module.kubernetes.host
 
-  client_certificate     = module.kubernetes.client_certificate
-  client_key             = module.kubernetes.client_key
-  cluster_ca_certificate = module.kubernetes.cluster_ca_certificate
+  client_certificate     = base64decode(module.kubernetes.client_certificate)
+  client_key             = base64decode(module.kubernetes.client_key)
+  cluster_ca_certificate = base64decode(module.kubernetes.cluster_ca_certificate)
 }
 ```
