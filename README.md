@@ -30,7 +30,7 @@ module "kubernetes" {
 
 ### Kubernetes provider
 
-A static version can be set, as long as it's above the minimum version specified above. The module uses the Kubernetes provider for adding namespaces, but if you don't need to create that through the module feel free not to include the provider block below. The reason
+A static version can be set, as long as it's above the minimum version specified above. If you want to create namespaces, or roles, you need to define how the provider can connect to the cluster by adding the following provider block.
 
 ```hcl
 provider "kubernetes" {
