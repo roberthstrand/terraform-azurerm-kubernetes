@@ -23,38 +23,38 @@ module "kubernetes" {
 
   # Adding additional pools
   additional_node_pools = [
-  {
-    name                = "pool01"
-    vm_size             = "Standard_B2s"
-    node_count          = 1
-    enable_auto_scaling = false
-    min_count           = null
-    max_count           = null
-    node_labels         = {
-      "type" = "burstable"
+    {
+      name                = "pool01"
+      vm_size             = "Standard_B2s"
+      node_count          = 1
+      enable_auto_scaling = false
+      min_count           = null
+      max_count           = null
+      node_labels = {
+        "type" = "burstable"
       }
-    tags                = null
-    additional_settings = {
-      max_pods  = 30
-    }
-  },
-  {
-    name                = "pool02"
-    vm_size             = "Standard_D2s_v3"
-    node_count          = null
-    enable_auto_scaling = true
-    min_count           = 2
-    max_count           = 3
-    node_labels         = {
-      "type"      = "cpu-optimized"
-      "autoscale" = "true"
+      tags = null
+      additional_settings = {
+        max_pods = 30
       }
-    tags                = null
-    additional_settings = {
-      mode      = "System"
-      max_pods  = 30
+    },
+    {
+      name                = "pool02"
+      vm_size             = "Standard_D2s_v3"
+      node_count          = null
+      enable_auto_scaling = true
+      min_count           = 2
+      max_count           = 3
+      node_labels = {
+        "type"      = "cpu-optimized"
+        "autoscale" = "true"
+      }
+      tags = null
+      additional_settings = {
+        mode     = "System"
+        max_pods = 30
+      }
     }
-  }
   ]
 
   # Creating namespaces
