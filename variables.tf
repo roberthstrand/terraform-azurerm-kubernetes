@@ -2,11 +2,6 @@ variable "name" {
   type        = string
   description = "Name the deployment."
 }
-variable "tags" {
-  type        = map(string)
-  default     = null
-  description = "Tags that will be used for the deployment."
-}
 variable "resource_group" {
   type        = string
   description = "The resource group you want your deployment in."
@@ -14,6 +9,11 @@ variable "resource_group" {
 variable "subnet_id" {
   type        = string
   description = "The object ID of the subnet that you want to deploy to"
+}
+variable "tags" {
+  type        = map(string)
+  default     = null
+  description = "Tags that will be used for the deployment."
 }
 variable "enable_node_public_ip" {
   type        = bool
@@ -120,15 +120,10 @@ variable "rbac_server_app_secret" {
   default     = null
   description = "The Server Secret of an Azure Active Directory Application."
 }
-variable "sp_client_id" {
-  type        = string
-  description = "Client ID of the Service Principal, if you want to use your own."
+variable "service_principal" {
+  type        = map(string)
   default     = null
-}
-variable "sp_client_secret" {
-  type        = string
-  description = "Client secret of the Service Principal, if you want to use your own."
-  default     = null
+  description = "Map used to set the service principal client ID and secret."
 }
 variable "default_node_pool" {
   description = "The default node pool, defaults to a pool with one node of the Standard_D2s_v3 VM Size."

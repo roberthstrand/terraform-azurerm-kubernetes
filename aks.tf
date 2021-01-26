@@ -9,9 +9,9 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   tags                = var.tags
 
   # If no Kubernetes version is set, it uses the latest non-preview version.
-  # Can be set to use the latest preview version, and 
-  # See the local value for more information.
-  kubernetes_version = local.kubernetes_version
+  # Can be set to use the latest preview version, and one can define a prefix to make
+  # the versions kept at a certain major version.
+  kubernetes_version = var.kubernetes_version == "not_set" ? data.azurerm_kubernetes_service_versions.current.latest_version : var.kubernetes_version
 
   addon_profile {
     kube_dashboard {
@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     enabled = var.role_based_access_control
     azure_active_directory {
       managed                = var.azure_ad_managed
-      admin_group_object_ids = var.azure_ad_managed == true ? var.admin_groups : null
+      admin_group_object_ids = var.azure_ad_managed ? var.admin_groups : null
 
       # If managed is set to false, then the following properties needs to be set
       client_app_id     = var.azure_ad_managed == false ? var.rbac_client_app_id : null
@@ -63,8 +63,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     max_count           = var.default_node_pool[0].max_count
     availability_zones  = var.availability_zones
 
-    #node_taints = var.default_node_pool[0].node_taints
-
     # Various additional settings
     max_pods        = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
     os_disk_size_gb = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
@@ -76,17 +74,17 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   # We can control which by using dynamic blocks.
   ## If a Service Principal is not present
   dynamic "identity" {
-    for_each = var.sp_client_id == null ? ["SystemAssigned"] : []
+    for_each = var.service_principal == null ? ["SystemAssigned"] : []
     content {
       type = "SystemAssigned"
     }
   }
   ## If a Service Principal is present
   dynamic "service_principal" {
-    for_each = var.sp_client_id != null ? [var.sp_client_id] : []
+    for_each = var.service_principal != null ? ["ServicePrincipal"] : []
     content {
-      client_id     = var.sp_client_id
-      client_secret = var.sp_client_secret
+      client_id     = lookup(var.service_principal, "client_id", null)
+      client_secret = lookup(var.service_principal, "client_secret", null)
     }
   }
 }
