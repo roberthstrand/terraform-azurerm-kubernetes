@@ -121,12 +121,14 @@ variable "rbac_server_app_secret" {
   description = "The Server Secret of an Azure Active Directory Application."
 }
 variable "sp_client_id" {
-  type    = string
-  default = null
+  type        = string
+  description = "Client ID of the Service Principal, if you want to use your own."
+  default     = null
 }
 variable "sp_client_secret" {
-  type    = string
-  default = null
+  type        = string
+  description = "Client secret of the Service Principal, if you want to use your own."
+  default     = null
 }
 variable "default_node_pool" {
   description = "The default node pool, defaults to a pool with one node of the Standard_D2s_v3 VM Size."

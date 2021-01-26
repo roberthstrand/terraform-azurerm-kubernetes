@@ -6,6 +6,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   location            = data.azurerm_resource_group.aks.location
   resource_group_name = var.resource_group
   dns_prefix          = var.name
+  tags                = var.tags
 
   # If no Kubernetes version is set, use the latest non-preview version.
   # See the local value for more information.

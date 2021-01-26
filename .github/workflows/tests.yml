@@ -23,4 +23,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: hashicorp/setup-terraform@v1
-    - run: terraform fmt -check
+    - run: terraform fmt -check -recursive
