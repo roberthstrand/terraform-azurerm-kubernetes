@@ -8,7 +8,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dns_prefix          = var.name
   tags                = var.tags
 
-  # If no Kubernetes version is set, use the latest non-preview version.
+  # If no Kubernetes version is set, it uses the latest non-preview version.
+  # Can be set to use the latest preview version, and 
   # See the local value for more information.
   kubernetes_version = local.kubernetes_version
 
