@@ -1,0 +1,19 @@
+name: "checkov check"
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Checkov Github Action
+        # You may pin to the exact commit or the version.
+        # uses: bridgecrewio/checkov-action@5c6375613e29384c477e33a6bfd36a351dde805d
+        uses: bridgecrewio/checkov-action@v13
+        with:
+          # directory with infrastructure code to scan
+          directory: ./examples/defaults
