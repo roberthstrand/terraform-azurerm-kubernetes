@@ -73,7 +73,7 @@ variable "outbound_type" {
 variable "pod_cidr" {
   type        = string
   description = "When using the kubenet network plugin, a CIDR needs to be set for pod IP addresses."
-  default     = "192.168.0.0/24"
+  default     = "192.168.0.0/16"
 }
 variable "service_cidr" {
   type        = string
