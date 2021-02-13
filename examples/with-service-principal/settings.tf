@@ -4,7 +4,7 @@ terraform {
       version = "=2.40.0"
     }
     azuread = {
-      version = "=0.7.0"
+      version = "=1.3.0"
     }
   }
 }

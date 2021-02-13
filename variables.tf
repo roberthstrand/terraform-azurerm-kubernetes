@@ -157,6 +157,7 @@ variable "additional_node_pools" {
     min_count           = number
     max_count           = number
     node_labels         = map(string)
+    node_taints         = list(string)
     tags                = map(string)
     additional_settings = map(string)
   }))
