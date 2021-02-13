@@ -1,6 +1,6 @@
 module "kubernetes" {
   source  = "roberthstrand/kubernetes/azurerm"
-  version = "1.1.0"
+  version = "1.2.0"
 
   name           = "demo"
   resource_group = azurerm_resource_group.cluster.name
@@ -30,6 +30,7 @@ module "kubernetes" {
       enable_auto_scaling = false
       min_count           = null
       max_count           = null
+      node_taints         = []
       node_labels = {
         "type" = "burstable"
       }
@@ -45,10 +46,13 @@ module "kubernetes" {
       enable_auto_scaling = true
       min_count           = 2
       max_count           = 3
+      node_taints         = ["key=value:NoSchedule", "key=value:NoSchedule"]
+
       node_labels = {
         "type"      = "cpu-optimized"
         "autoscale" = "true"
       }
+
       tags = null
       additional_settings = {
         mode     = "System"

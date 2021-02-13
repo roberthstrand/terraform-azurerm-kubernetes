@@ -103,6 +103,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "additional_cluster" {
   max_count           = each.value.max_count
 
   node_labels = each.value.node_labels
+  node_taints = each.value.node_taints != null ? each.value.node_taints : [""]
   tags        = each.value.tags
 
   # Various additional settings
