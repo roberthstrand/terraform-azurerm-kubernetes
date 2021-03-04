@@ -64,10 +64,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     availability_zones  = var.availability_zones
 
     # Various additional settings
-    max_pods        = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
-    os_disk_size_gb = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
-    os_disk_type    = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
-    type            = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
+    only_critical_addons_enabled  = lookup(var.default_node_pool[0].additional_settings, "only_critical_addons_enabled", null)
+    max_pods                      = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
+    os_disk_size_gb               = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
+    os_disk_type                  = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
+    type                          = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
   }
 
   # One of either identity or service_principal blocks must be specified.

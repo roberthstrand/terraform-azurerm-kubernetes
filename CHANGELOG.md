@@ -1,3 +1,7 @@
+# v1.3.0
+
+- Add sku_tier (#3)
+- Default node pool - only_critical_addons_enabled (#4)
 # v1.2.1
 
 - Set azuread to require version >= 1.3.0 and updated examples due to deprecated naming convention.
