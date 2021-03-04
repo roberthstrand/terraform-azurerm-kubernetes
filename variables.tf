@@ -6,6 +6,11 @@ variable "resource_group" {
   type        = string
   description = "The resource group you want your deployment in."
 }
+variable "sku_tier" {
+  type        = string
+  default     = "Free"
+  description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free."
+}
 variable "subnet_id" {
   type        = string
   description = "The object ID of the subnet that you want to deploy to"
@@ -124,6 +129,22 @@ variable "service_principal" {
   type        = map(string)
   default     = null
   description = "Map used to set the service principal client ID and secret."
+}
+variable "linux_profile" {
+  description = "The Linux profile for the cluster"
+  type = object({
+    admin_username = string
+    ssh_key        = string
+  })
+  default = null
+}
+variable "windows_profile" {
+  description = "The Windows profile for the cluster"
+  type = object({
+    admin_username = string
+    admin_password = string
+  })
+  default = null
 }
 variable "default_node_pool" {
   description = "The default node pool, defaults to a pool with one node of the Standard_D2s_v3 VM Size."
