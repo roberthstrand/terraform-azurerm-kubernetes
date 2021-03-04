@@ -65,11 +65,11 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     availability_zones  = var.availability_zones
 
     # Various additional settings
-    only_critical_addons_enabled  = lookup(var.default_node_pool[0].additional_settings, "only_critical_addons_enabled", null)
-    max_pods                      = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
-    os_disk_size_gb               = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
-    os_disk_type                  = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
-    type                          = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
+    only_critical_addons_enabled = lookup(var.default_node_pool[0].additional_settings, "only_critical_addons_enabled", null)
+    max_pods                     = lookup(var.default_node_pool[0].additional_settings, "max_pods", null)
+    os_disk_size_gb              = lookup(var.default_node_pool[0].additional_settings, "os_disk_size_gb", null)
+    os_disk_type                 = lookup(var.default_node_pool[0].additional_settings, "os_disk_type", null)
+    type                         = lookup(var.default_node_pool[0].additional_settings, "type", "VirtualMachineScaleSets")
   }
 
   # One of either identity or service_principal blocks must be specified.
@@ -87,6 +87,24 @@ resource "azurerm_kubernetes_cluster" "cluster" {
     content {
       client_id     = lookup(var.service_principal, "client_id", null)
       client_secret = lookup(var.service_principal, "client_secret", null)
+    }
+  }
+
+  # If either Linux or Windows profile is present:
+  dynamic "linux_profile" {
+    for_each = var.linux_profile != null ? ["LinuxProfile"] : []
+    content {
+      admin_username = var.linux_profile.admin_username
+      ssh_key {
+        key_data = var.linux_profile.ssh_key
+      }
+    }
+  }
+  dynamic "windows_profile" {
+    for_each = var.windows_profile != null ? ["WinProfile"] : []
+    content {
+      admin_username = var.windows_profile.admin_username
+      admin_password = var.windows_profile.admin_password
     }
   }
 }

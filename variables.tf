@@ -130,6 +130,22 @@ variable "service_principal" {
   default     = null
   description = "Map used to set the service principal client ID and secret."
 }
+variable "linux_profile" {
+  description = "The Linux profile for the cluster"
+  type = object({
+    admin_username = string
+    ssh_key        = string
+  })
+  default = null
+}
+variable "windows_profile" {
+  description = "The Windows profile for the cluster"
+  type = object({
+    admin_username = string
+    admin_password = string
+  })
+  default = null
+}
 variable "default_node_pool" {
   description = "The default node pool, defaults to a pool with one node of the Standard_D2s_v3 VM Size."
   type = list(object({
