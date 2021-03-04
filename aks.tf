@@ -5,6 +5,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   name                = format("%s-aks", var.name)
   location            = data.azurerm_resource_group.aks.location
   resource_group_name = var.resource_group
+  sku_tier            = var.sku_tier
   dns_prefix          = var.name
   tags                = var.tags
 

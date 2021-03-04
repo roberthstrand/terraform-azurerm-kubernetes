@@ -6,6 +6,11 @@ variable "resource_group" {
   type        = string
   description = "The resource group you want your deployment in."
 }
+variable "sku_tier" {
+  type        = string
+  default     = "Free"
+  description = "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free and Paid (which includes the Uptime SLA). Defaults to Free."
+}
 variable "subnet_id" {
   type        = string
   description = "The object ID of the subnet that you want to deploy to"
